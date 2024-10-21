@@ -101,79 +101,31 @@ def list_projects():
     for project in projects:
         print(f"{project['id']}: {project['name']}")
 
-def main():
-    init_tasks_file()
-    args = sys.argv[1:]
+        
 
-    if not args:
-        print("Please provide a command.")
-        return
+# (Keep your existing code but remove the main() part and add a few callable functions)
 
-    command = args[0]
+# Call this to interact with your app programmatically.
+def main_function(command, *args):
     if command == 'add-project':
-        if len(args) < 2:
-            print("Please provide a project name.")
-        else:
-            add_project(" ".join(args[1:]))
+        return add_project(*args)
     elif command == 'add-task':
-        if len(args) < 3:
-            print("Please provide project ID and task description.")
-        else:
-            try:
-                project_id = int(args[1])
-                description = " ".join(args[2:])
-                add_task(project_id, description)
-            except ValueError:
-                print("Invalid project ID.")
+        return add_task(*args)
     elif command == 'update-task':
-        if len(args) < 3:
-            print("Please provide task ID and new description.")
-        else:
-            try:
-                task_id = int(args[1])
-                new_description = " ".join(args[2:])
-                update_task(task_id, new_description)
-            except ValueError:
-                print("Invalid task ID.")
+        return update_task(*args)
     elif command == 'delete-task':
-        if len(args) < 2:
-            print("Please provide task ID to delete.")
-        else:
-            try:
-                task_id = int(args[1])
-                delete_task(task_id)
-            except ValueError:
-                print("Invalid task ID.")
+        return delete_task(*args)
     elif command == 'mark-in-progress':
-        if len(args) < 2:
-            print("Please provide task ID to mark as in-progress.")
-        else:
-            try:
-                task_id = int(args[1])
-                mark_task_status(task_id, 'in-progress')
-            except ValueError:
-                print("Invalid task ID.")
+        return mark_task_status(*args)
     elif command == 'mark-done':
-        if len(args) < 2:
-            print("Please provide task ID to mark as done.")
-        else:
-            try:
-                task_id = int(args[1])
-                mark_task_status(task_id, 'done')
-            except ValueError:
-                print("Invalid task ID.")
+        return mark_task_status(*args)
     elif command == 'list-tasks':
-        if len(args) > 1:
-            if args[1].isdigit():
-                list_tasks(project_id=int(args[1]))
-            else:
-                list_tasks(status=args[1])
-        else:
-            list_tasks()
+        return list_tasks(*args)
     elif command == 'list-projects':
-        list_projects()
+        return list_projects()
     else:
-        print(f"Unknown command: {command}")
+        return f"Unknown command: {command}"
+
 
 if __name__ == "__main__":
     main()
